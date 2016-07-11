@@ -32,6 +32,8 @@ iseq ${interface} ${net${ifIndex}/mac} && goto ifBoot || inc ifIndex && goto ifF
 :ifBoot
 iseq ${ifBootAttempt} ${ifBootAttemptMax} && goto ifBootFailure || goto ifBootContinue
 :ifBootContinue
+echo "sleeping to allow link up"
+sleep 10
 ifopen net${ifIndex}
 ifconf net${ifIndex} && goto ifConfigured || inc ifBootAttempt && goto ifBoot
 
